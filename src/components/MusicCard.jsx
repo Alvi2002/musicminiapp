@@ -1,35 +1,57 @@
 import {
+
 Download,
+
 Plus,
+
 Play
+
 }
+
 from "lucide-react";
 
 
+
 import {
+
 downloadSong
+
 }
+
 from "../api/download";
+
+
 
 
 
 export default function MusicCard({
 
 song,
+
 addSong,
+
 playSong
 
 }){
 
 
+
 return(
+
 
 
 <div className="card">
 
 
 
-<img src={song.image}/>
+<img
+
+src={
+song.image ||
+"https://picsum.photos/300"
+}
+
+/>
 
 
 
@@ -37,14 +59,22 @@ return(
 <div className="info">
 
 
+
 <h3>
+
 {song.title}
+
 </h3>
 
 
+
 <p>
-{song.artist}
+
+{song.artist ||
+"YouTube Music"}
+
 </p>
+
 
 
 </div>
@@ -55,11 +85,18 @@ return(
 
 <button
 
+
 onClick={()=>playSong(song)}
+
+
+title="Play"
+
 
 >
 
-<Play/>
+
+<Play size={22}/>
+
 
 </button>
 
@@ -68,12 +105,19 @@ onClick={()=>playSong(song)}
 
 
 <button
+
 
 onClick={()=>addSong(song)}
 
+
+title="Add Playlist"
+
+
 >
 
-<Plus/>
+
+<Plus size={22}/>
+
 
 </button>
 
@@ -82,6 +126,7 @@ onClick={()=>addSong(song)}
 
 
 <button
+
 
 onClick={()=>downloadSong(
 
@@ -91,17 +136,27 @@ song.title
 
 )}
 
+
+title="Download"
+
+
 >
 
-<Download/>
+
+<Download size={22}/>
+
 
 </button>
+
+
 
 
 
 </div>
 
 
+
 )
+
 
 }
