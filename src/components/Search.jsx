@@ -1,5 +1,5 @@
-import {useState} from "react";
-import {searchYoutube} from "../api/youtube";
+import { useState } from "react";
+import { Search as SearchIcon } from "lucide-react";
 
 
 export default function Search({
@@ -9,39 +9,68 @@ setResults
 }){
 
 
-const [text,setText]=useState("");
+const [text,setText] = useState("");
 
 
 
-async function handleSearch(){
+function handleSearch(){
 
 
-if(!text)return;
+if(text.trim()){
 
 
-const data =
-await searchYoutube(text);
+setResults(text.trim());
 
 
-setResults(data);
+}
 
 
 }
 
 
 
+
+function handleKey(e){
+
+
+if(e.key === "Enter"){
+
+
+handleSearch();
+
+
+}
+
+
+}
+
+
+
+
+
 return(
 
-<div>
+
+<div className="searchBox">
+
+
+<SearchIcon
+className="searchIcon"
+/>
+
 
 
 <input
 
+
 className="search"
 
-placeholder="Search YouTube music..."
+
+placeholder="Search songs..."
+
 
 value={text}
+
 
 
 onChange={
@@ -49,7 +78,13 @@ e=>setText(e.target.value)
 }
 
 
+
+onKeyDown={handleKey}
+
+
+
 />
+
 
 
 
@@ -68,6 +103,7 @@ Search
 
 
 </div>
+
 
 )
 
