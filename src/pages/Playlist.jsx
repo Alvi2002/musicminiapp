@@ -1,5 +1,11 @@
+import MusicCard from "../components/MusicCard";
+
+
 export default function Playlist({
-playlist
+
+playlist,
+setSong
+
 }){
 
 
@@ -13,42 +19,23 @@ Your Playlist
 </h1>
 
 
+
 {
-
-playlist.length===0 ?
-
-<p>
-No songs yet
-</p>
-
-
-:
 
 playlist.map(song=>(
 
 
-<div className="card">
+<MusicCard
 
+key={song.id}
 
-<img src={song.image}/>
+song={song}
 
+playSong={setSong}
 
-<div>
+addSong={()=>{}}
 
-<h3>
-{song.title}
-</h3>
-
-
-<p>
-{song.artist}
-</p>
-
-
-</div>
-
-
-</div>
+/>
 
 
 ))
@@ -59,7 +46,7 @@ playlist.map(song=>(
 
 </div>
 
-
 )
+
 
 }
