@@ -2,7 +2,15 @@ import {
 Download,
 Plus,
 Play
-} from "lucide-react";
+}
+from "lucide-react";
+
+
+import {
+downloadSong
+}
+from "../api/download";
+
 
 
 export default function MusicCard({
@@ -14,13 +22,15 @@ playSong
 }){
 
 
-
 return(
+
 
 <div className="card">
 
 
+
 <img src={song.image}/>
+
 
 
 
@@ -42,6 +52,7 @@ return(
 
 
 
+
 <button
 
 onClick={()=>playSong(song)}
@@ -51,6 +62,7 @@ onClick={()=>playSong(song)}
 <Play/>
 
 </button>
+
 
 
 
@@ -67,15 +79,17 @@ onClick={()=>addSong(song)}
 
 
 
+
+
 <button
 
-onClick={()=>
+onClick={()=>downloadSong(
 
-alert(
-"Download started"
-)
+song.audio,
 
-}
+song.title
+
+)}
 
 >
 
@@ -86,6 +100,7 @@ alert(
 
 
 </div>
+
 
 )
 
