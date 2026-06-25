@@ -1,7 +1,20 @@
 import {Download,Plus} from "lucide-react";
 
 
-export default function MusicCard({song}){
+export default function MusicCard({
+song,
+addSong
+}){
+
+
+function downloadSong(){
+
+alert(
+"Downloading "+song.title
+)
+
+}
+
 
 
 return(
@@ -10,6 +23,7 @@ return(
 
 
 <img src={song.image}/>
+
 
 
 <div className="info">
@@ -22,27 +36,33 @@ return(
 {song.artist}
 </p>
 
+
 </div>
 
 
-<button>
 
-<Download size={22}/>
+<button
+onClick={downloadSong}
+>
 
-</button>
-
-
-<button>
-
-<Plus size={22}/>
+<Download/>
 
 </button>
 
+
+
+
+<button
+onClick={()=>addSong(song)}
+>
+
+<Plus/>
+
+</button>
 
 
 </div>
 
 )
-
 
 }
