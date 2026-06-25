@@ -5,8 +5,11 @@ import {songs} from "../data";
 
 
 export default function Home({
+
 setPlaylist,
-playlist
+playlist,
+setSong
+
 }){
 
 
@@ -14,23 +17,23 @@ playlist
 function addSong(song){
 
 
-const exists =
-playlist.find(
+if(!playlist.find(
 x=>x.id===song.id
-);
+)){
 
-
-
-if(!exists){
 
 setPlaylist([
 ...playlist,
 song
+
 ])
 
-}
 
 }
+
+
+}
+
 
 
 
@@ -42,7 +45,6 @@ return(
 <h1>
 Good Morning
 </h1>
-
 
 
 <div className="search">
@@ -71,7 +73,10 @@ song={song}
 
 addSong={addSong}
 
+playSong={setSong}
+
 />
+
 
 ))
 
