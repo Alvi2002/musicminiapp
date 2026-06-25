@@ -1,33 +1,37 @@
 import MusicCard from "../components/MusicCard";
 
+import {songs} from "../data";
 
-const songs=[
 
-{
-id:1,
-title:"Do You Remember",
-artist:"Queen",
-image:"https://picsum.photos/100"
-},
 
-{
-id:2,
-title:"Top Songs 2024",
-artist:"Love Life",
-image:"https://picsum.photos/101"
-},
+export default function Home({
+setPlaylist,
+playlist
+}){
 
-{
-id:3,
-title:"Romantic Acoustic",
-artist:"Acoustic Pulse",
-image:"https://picsum.photos/102"
+
+
+function addSong(song){
+
+
+const exists =
+playlist.find(
+x=>x.id===song.id
+);
+
+
+
+if(!exists){
+
+setPlaylist([
+...playlist,
+song
+])
+
 }
 
-];
+}
 
-
-export default function Home(){
 
 
 return(
@@ -38,6 +42,7 @@ return(
 <h1>
 Good Morning
 </h1>
+
 
 
 <div className="search">
@@ -53,13 +58,19 @@ Popular Now
 </h2>
 
 
+
 {
 
 songs.map(song=>(
 
 <MusicCard
+
 key={song.id}
+
 song={song}
+
+addSong={addSong}
+
 />
 
 ))
@@ -71,5 +82,6 @@ song={song}
 </div>
 
 )
+
 
 }
