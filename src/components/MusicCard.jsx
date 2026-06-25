@@ -1,19 +1,17 @@
-import {Download,Plus} from "lucide-react";
+import {
+Download,
+Plus,
+Play
+} from "lucide-react";
 
 
 export default function MusicCard({
+
 song,
-addSong
+addSong,
+playSong
+
 }){
-
-
-function downloadSong(){
-
-alert(
-"Downloading "+song.title
-)
-
-}
 
 
 
@@ -28,9 +26,11 @@ return(
 
 <div className="info">
 
+
 <h3>
 {song.title}
 </h3>
+
 
 <p>
 {song.artist}
@@ -41,24 +41,48 @@ return(
 
 
 
+
 <button
-onClick={downloadSong}
+
+onClick={()=>playSong(song)}
+
+>
+
+<Play/>
+
+</button>
+
+
+
+
+<button
+
+onClick={()=>addSong(song)}
+
+>
+
+<Plus/>
+
+</button>
+
+
+
+<button
+
+onClick={()=>
+
+alert(
+"Download started"
+)
+
+}
+
 >
 
 <Download/>
 
 </button>
 
-
-
-
-<button
-onClick={()=>addSong(song)}
->
-
-<Plus/>
-
-</button>
 
 
 </div>
