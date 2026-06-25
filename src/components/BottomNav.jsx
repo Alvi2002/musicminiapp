@@ -1,9 +1,7 @@
-import {Home, Music, User} from "lucide-react";
-import {useState} from "react";
+import {Home,Music,User} from "lucide-react";
 
-export default function BottomNav(){
 
-const [active,setActive]=useState("home");
+export default function BottomNav({setPage}){
 
 
 return(
@@ -12,34 +10,44 @@ return(
 
 
 <button
-onClick={()=>setActive("home")}
-onContextMenu={(e)=>e.preventDefault()}
+onClick={()=>setPage("home")}
 >
+
 <Home/>
-<span>Home</span>
+
+Home
+
 </button>
 
 
+
 <button
-onClick={()=>setActive("playlist")}
-onContextMenu={(e)=>e.preventDefault()}
+onClick={()=>setPage("playlist")}
 >
+
 <Music/>
-<span>Playlist</span>
+
+Playlist
+
 </button>
+
 
 
 <button
-onClick={()=>setActive("profile")}
-onContextMenu={(e)=>e.preventDefault()}
+onClick={()=>setPage("profile")}
 >
+
 <User/>
-<span>Profile</span>
+
+Profile
+
 </button>
+
 
 
 </div>
 
 )
+
 
 }
