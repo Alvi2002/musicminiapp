@@ -1,4 +1,6 @@
-export default function Playlist(){
+export default function Playlist({
+playlist
+}){
 
 
 return(
@@ -11,12 +13,52 @@ Your Playlist
 </h1>
 
 
+{
+
+playlist.length===0 ?
+
 <p>
 No songs yet
 </p>
 
 
+:
+
+playlist.map(song=>(
+
+
+<div className="card">
+
+
+<img src={song.image}/>
+
+
+<div>
+
+<h3>
+{song.title}
+</h3>
+
+
+<p>
+{song.artist}
+</p>
+
+
 </div>
+
+
+</div>
+
+
+))
+
+
+}
+
+
+</div>
+
 
 )
 
