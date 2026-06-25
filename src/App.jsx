@@ -1,18 +1,70 @@
-import BottomNav from "./components/BottomNav";
-import Home from "./pages/Home";
+import {useState} from "react";
 
-function App(){
+import BottomNav from "./components/BottomNav";
+
+import Home from "./pages/Home";
+import Playlist from "./pages/Playlist";
+import Profile from "./pages/Profile";
+
+
+export default function App(){
+
+
+const [page,setPage]=useState("home");
+
+
+const [playlist,setPlaylist]=useState([]);
+
+
 
 return(
+
 <div>
 
-<Home/>
 
-<BottomNav/>
+{
+page==="home" &&
 
-</div>
-)
+<Home
+playlist={playlist}
+setPlaylist={setPlaylist}
+
+/>
 
 }
 
-export default App;
+
+
+{
+page==="playlist" &&
+
+<Playlist
+playlist={playlist}
+
+/>
+
+}
+
+
+
+{
+page==="profile" &&
+
+<Profile/>
+
+}
+
+
+
+<BottomNav
+setPage={setPage}
+
+/>
+
+
+</div>
+
+)
+
+
+}
