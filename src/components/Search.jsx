@@ -1,33 +1,73 @@
+import {useState} from "react";
+import {searchYoutube} from "../api/youtube";
+
+
 export default function Search({
 
-value,
-setValue
+setResults
 
 }){
 
 
+const [text,setText]=useState("");
+
+
+
+async function handleSearch(){
+
+
+if(!text)return;
+
+
+const data =
+await searchYoutube(text);
+
+
+setResults(data);
+
+
+}
+
+
+
 return(
+
+<div>
 
 
 <input
 
-
 className="search"
 
+placeholder="Search YouTube music..."
 
-placeholder="Search music..."
-
-
-value={value}
+value={text}
 
 
 onChange={
-e=>setValue(e.target.value)
+e=>setText(e.target.value)
 }
 
 
 />
 
+
+
+<button
+
+className="searchBtn"
+
+onClick={handleSearch}
+
+>
+
+Search
+
+</button>
+
+
+
+</div>
 
 )
 
