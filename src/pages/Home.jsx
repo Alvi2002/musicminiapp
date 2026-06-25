@@ -1,53 +1,84 @@
 import { useState } from "react";
 
-import MusicCard from "../components/MusicCard";
 import Search from "../components/Search";
+import MusicCard from "../components/MusicCard";
 
-import { songs } from "../data";
+import { searchYoutube } from "../api/youtube";
+
 
 
 export default function Home({
 
-  setPlaylist,
-  playlist,
-  setSong
+setPlaylist,
+playlist,
+setSong
 
 }){
 
 
-const [search,setSearch] = useState("");
+const [results,setResults] = useState([]);
+
+const [loading,setLoading] = useState(false);
 
 
 
-const filteredSongs = songs.filter(song =>
+async function handleSearch(query){
 
-song.title
-.toLowerCase()
-.includes(
-search.toLowerCase()
-)
 
-||
-song.artist
-.toLowerCase()
-.includes(
-search.toLowerCase()
-)
+try{
 
-);
+
+setLoading(true);
+
+
+
+const data = await searchYoutube(query);
+
+
+
+setResults(data);
+
+
+
+}
+
+catch(error){
+
+
+console.log(error);
+
+
+setResults([]);
+
+
+}
+
+finally{
+
+
+setLoading(false);
+
+
+}
+
+
+
+}
+
 
 
 
 function addSong(song){
 
 
-const alreadyAdded = playlist.find(
+const exists =
+playlist.find(
 item => item.id === song.id
 );
 
 
 
-if(!alreadyAdded){
+if(!exists){
 
 
 setPlaylist([
@@ -61,7 +92,10 @@ song
 
 }
 
+
 }
+
+
 
 
 
@@ -75,12 +109,16 @@ return(
 
 
 <h1>
-Good Morning 👋
+
+Search Music 🎧
+
 </h1>
 
 
 <p>
-Listen your favourite music
+
+Find your favourite songs
+
 </p>
 
 
@@ -88,28 +126,52 @@ Listen your favourite music
 
 
 
+
+
 <Search
 
-value={search}
-
-setValue={setSearch}
+setResults={handleSearch}
 
 />
 
 
 
+
+
+{
+
+loading &&
+
+<p className="empty">
+
+Searching...
+
+</p>
+
+}
+
+
+
+
+
 <h2>
-Popular Now 🎵
+
+Results 🎵
+
 </h2>
+
+
 
 
 
 {
 
-filteredSongs.length > 0 ?
+results.length > 0 ?
 
 
-filteredSongs.map(song => (
+
+results.map(song => (
+
 
 
 <MusicCard
@@ -127,7 +189,6 @@ addSong={addSong}
 playSong={setSong}
 
 
-
 />
 
 
@@ -137,14 +198,19 @@ playSong={setSong}
 :
 
 
+!loading &&
+
 <p className="empty">
 
-No song found
+Search a song to start
 
 </p>
 
 
+
 }
+
+
 
 
 
